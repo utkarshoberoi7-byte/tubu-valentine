@@ -1,112 +1,190 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For Tubu 💖</title>
-    <style>
-        body {
-            background: linear-gradient(to bottom right, #ffe6f0, #ffd6e0);
-            text-align: center;
-            font-family: 'Helvetica Neue', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            margin: 0;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Tubu 💖</title>
 
-        h1 {
-            margin-top: 120px;
-            font-size: 42px;
-            color: #ff4d6d;
-        }
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Helvetica Neue', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    color: white;
+}
 
-        p {
-            font-size: 20px;
-            color: #555;
-        }
+/* Background collage */
+body::before {
+    content: "";
+    background: url("collage.jpg") no-repeat center center/cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
 
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            margin: 15px;
-            transition: 0.3s;
-        }
+/* Softer overlay */
+body::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-        }
+.container {
+    max-width: 700px;
+    padding: 20px;
+}
 
-        #yesBtn:hover {
-            transform: scale(1.1);
-        }
+h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
 
-        #noBtn {
-            background-color: #999;
-            color: white;
-            position: absolute;
-        }
+#message {
+    font-size: 20px;
+    margin-bottom: 30px;
+    min-height: 80px;
+    line-height: 1.5;
+}
 
-        .heart {
-            position: absolute;
-            color: #ff4d6d;
-            font-size: 24px;
-            animation: float 6s linear infinite;
-        }
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 15px;
+    transition: 0.3s;
+}
 
-        @keyframes float {
-            from {
-                transform: translateY(100vh);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-10vh);
-                opacity: 0;
-            }
-        }
-    </style>
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+    transform: scale(1);
+}
+
+#noBtn {
+    background-color: #999;
+    color: white;
+    position: absolute;
+}
+
+.heart {
+    position: absolute;
+    font-size: 24px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 32px; }
+    #message { font-size: 18px; }
+}
+</style>
 </head>
+
 <body>
 
+<div class="container">
     <h1>Tubu 💕</h1>
-    <p>From the moment I met you, everything felt softer, brighter, and warmer.</p>
-    <p>Will you be my Valentine? 🥺💖</p>
+
+    <div id="message"></div>
 
     <button id="yesBtn" onclick="sayYes()">Yes, of course 💘</button>
     <button id="noBtn" onmouseover="moveButton()">No 😢</button>
 
-    <script>
-        function sayYes() {
-            document.body.innerHTML = `
-                <h1>YAYYYYY 😭💖</h1>
-                <p>You just made me the happiest person alive, Tubu 💕</p>
-                <p>I can't wait to make more memories with you 🥰</p>
-            `;
-        }
+    <!-- Spotify Embed (Sleek Version) -->
+    <div style="margin-top:25px;">
+        <iframe 
+            data-testid="embed-iframe"
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/3PV8uIQnxD4Qiimn3x6PVr?utm_source=generator"
+            width="100%"
+            height="80"
+            frameBorder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy">
+        </iframe>
+    </div>
 
-        function moveButton() {
-            var button = document.getElementById("noBtn");
-            var x = Math.random() * (window.innerWidth - 100);
-            var y = Math.random() * (window.innerHeight - 50);
+</div>
 
-            button.style.left = x + "px";
-            button.style.top = y + "px";
-        }
+<script>
 
-        // Floating hearts
-        setInterval(function() {
-            var heart = document.createElement("div");
-            heart.className = "heart";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.innerHTML = "💖";
-            document.body.appendChild(heart);
+// Typewriter Message
+var text = "Every version of us in these pictures means the world to me. I don’t just love the moments — I love growing with you. You make my world softer, brighter, and happier every single day. Will you be my Valentine? 💖";
+var i = 0;
 
-            setTimeout(function() {
-                heart.remove();
-            }, 6000);
-        }, 500);
-    </script>
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("message").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+    }
+}
+
+typeWriter();
+
+// Growing Yes Button
+var yesSize = 1;
+
+function moveButton() {
+    var button = document.getElementById("noBtn");
+    var x = Math.random() * (window.innerWidth - 120);
+    var y = Math.random() * (window.innerHeight - 80);
+
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+
+    yesSize += 0.1;
+    document.getElementById("yesBtn").style.transform = "scale(" + yesSize + ")";
+}
+
+function sayYes() {
+    document.body.innerHTML = `
+        <div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;color:white;background:black;">
+            <div>
+                <h1 style="font-size:42px;">YAYYYYY 😭💖</h1>
+                <p style="font-size:20px;">You just made me the happiest person alive, Tubu 💕</p>
+                <p style="font-size:18px;">I can’t wait to keep making memories with you 🥰</p>
+            </div>
+        </div>
+    `;
+}
+
+// Floating Hearts
+setInterval(function() {
+    var heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.innerHTML = "💖";
+    document.body.appendChild(heart);
+
+    setTimeout(function() {
+        heart.remove();
+    }, 6000);
+}, 600);
+
+</script>
 
 </body>
 </html>
