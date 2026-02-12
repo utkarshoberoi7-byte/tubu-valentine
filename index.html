@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For Tubu 💖</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #ffe6f0, #ffd6e0);
+            text-align: center;
+            font-family: 'Helvetica Neue', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        h1 {
+            margin-top: 120px;
+            font-size: 42px;
+            color: #ff4d6d;
+        }
+
+        p {
+            font-size: 20px;
+            color: #555;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 15px;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #999;
+            color: white;
+            position: absolute;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 24px;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tubu 💕</h1>
+    <p>From the moment I met you, everything felt softer, brighter, and warmer.</p>
+    <p>Will you be my Valentine? 🥺💖</p>
+
+    <button id="yesBtn" onclick="sayYes()">Yes, of course 💘</button>
+    <button id="noBtn" onmouseover="moveButton()">No 😢</button>
+
+    <script>
+        function sayYes() {
+            document.body.innerHTML = `
+                <h1>YAYYYYY 😭💖</h1>
+                <p>You just made me the happiest person alive, Tubu 💕</p>
+                <p>I can't wait to make more memories with you 🥰</p>
+            `;
+        }
+
+        function moveButton() {
+            var button = document.getElementById("noBtn");
+            var x = Math.random() * (window.innerWidth - 100);
+            var y = Math.random() * (window.innerHeight - 50);
+
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
+        // Floating hearts
+        setInterval(function() {
+            var heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.innerHTML = "💖";
+            document.body.appendChild(heart);
+
+            setTimeout(function() {
+                heart.remove();
+            }, 6000);
+        }, 500);
+    </script>
+
+</body>
+</html>
